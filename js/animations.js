@@ -1,8 +1,15 @@
 $(document).ready(function(){
+	jQuery('div.timeago').timeago();
+	jQuery.timeago.settings.allowFuture = true;
+	
+	
+	// var time = $('#timeTest').text(jQuery.timeago(new Date()));
+	
 	
 	$('#tweet-controls').hide();
-	
 	$('.tweet-actions').hide();
+	$('.stats').hide();
+	$('.reply').hide();
 	
 	$('.tweet-compose').on('click', function(){
 		$('#tweet-controls').show();
@@ -29,7 +36,7 @@ $(document).ready(function(){
 	
 	$('#tweet-submit').on('click', function(){
 		
-		$('#stream').prepend('<div class="tweet"><div class="content"><img class="avatar" src="img/alagoon.jpg" /><strong class="fullname">Blake H</strong><span class="username"> @blakeh</span><p class="tweet-text">' + $('.tweet-compose').val() + '</p><div class="stats"><div class="retweets"><p class="num-retweets">30</p><p>RETWEETS</p></div><div class="favorites"><p class="num-favorites">6</p><p>FAVORITES</p></div><div class="users-interact"><div><img src="img/vklimenko.jpg" /></div></div><div class="time">1:04 PM - 19 Sep 13</div></div></div></div>');
+		$('#stream').prepend('<div class="tweet"><div class="content"><img class="avatar" src="img/alagoon.jpg" /><strong class="fullname">Blake H</strong><span class="username"> @blakeh</span><p class="tweet-text">' + $('.tweet-compose').val() + '</p><div class="stats"><div class="retweets"><p class="num-retweets">30</p><p>RETWEETS</p></div><div class="favorites"><p class="num-favorites">6</p><p>FAVORITES</p></div><div class="users-interact"><div><img src="img/vklimenko.jpg" /></div></div><div class="timeTest  timeago time">' + new Date() + '</div></div></div></div>');
 		
 		$('.tweet-compose').val('');
 		$('#tweet-controls').hide();
@@ -37,7 +44,6 @@ $(document).ready(function(){
 		var remaining = 140;
 		var count = $('.tweet-compose').val().length;
 		$('#char-count').text(remaining);
-		
 	});
 	
 	$('.tweet').on('mouseenter', function() {
@@ -47,7 +53,21 @@ $(document).ready(function(){
 	$('.tweet').on('mouseleave', function() {
 		$('.tweet-actions', this).hide();
 	});
+	
 
+	var show = false;
+	$('.tweet').on('click',function() {
+		if(show === false){
+			$('.stats', this).show();
+			$('.reply', this).show();
+			show = true;
+		}
+		else {
+			$('.stats', this).hide();
+			$('.reply', this).hide();
+			show = false;
+		}
+	});
 	
 	
 	
